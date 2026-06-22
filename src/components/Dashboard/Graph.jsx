@@ -98,7 +98,14 @@ const Graph = ({ graphData }) => {
     },
   };
 
-  return <Bar className=" w-full" data={data} options={options}></Bar>;
+  return (
+    <div className="h-80 w-full">
+        <Bar
+            data={data}
+            options={options}
+        />
+    </div>
+);
 };
 
 export default Graph;

@@ -43,6 +43,12 @@ const ShortenItem = ({
         ""
       );
 
+      const [showUpdateModal, setShowUpdateModal] =
+        useState(false);
+
+    const [newAlias, setNewAlias] =
+        useState(shortUrl);
+
     const analyticsHandler = (shortUrl) => {
         if (!analyticToggle) {
             setSelectedUrl(shortUrl);
@@ -67,6 +73,33 @@ const ShortenItem = ({
 
             } catch(error) {
                 console.log(error);
+            }
+        };
+
+        const updateAliasHandler = async () => {
+
+            try {
+
+                await api.put(
+                    `/api/urls/${id}/alias`,
+                    {
+                        customAlias: newAlias
+                    },
+                    {
+                        headers: {
+                            Authorization:
+                                "Bearer " + token
+                        }
+                    }
+                );
+
+                refetch();
+                setShowUpdateModal(false);
+
+            } catch(error) {
+
+                console.log(error);
+
             }
         };
 
@@ -232,6 +265,9 @@ const ShortenItem = ({
                     {/* Future Update Button */}
 
                     <div
+                        onClick={() =>
+                            setShowUpdateModal(true)
+                        }
                         className="flex cursor-pointer gap-1 items-center bg-blue-600 py-2 font-semibold shadow-md shadow-slate-500 px-6 rounded-md text-white"
                     >
                         <button>Update</button>
@@ -255,7 +291,7 @@ const ShortenItem = ({
     <React.Fragment>
         <div className={`${
             analyticToggle ? "flex" : "hidden"
-          }  max-h-96 sm:mt-0 mt-5 min-h-96 relative  border-t-2 w-[100%] overflow-hidden `}>
+          }  sm:mt-4 mt-5 py-4 border-t-2 w-full`}>
             {loader ? (
                 <div className="min-h-[calc(450px-140px)] flex justify-center items-center w-full">
                     <div className="flex flex-col items-center gap-1">
@@ -314,43 +350,90 @@ const ShortenItem = ({
         </div>
     </React.Fragment>
 
-    {showDeleteModal && (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                {showDeleteModal && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
 
-        <div className="bg-white rounded-xl p-6 w-[350px] shadow-xl">
+                    <div className="bg-white rounded-xl p-6 w-[350px] shadow-xl">
 
-            <h2 className="text-lg font-semibold mb-3">
-                Delete URL?
-            </h2>
+                        <h2 className="text-lg font-semibold mb-3">
+                            Delete URL?
+                        </h2>
 
-            <p className="text-gray-600 mb-5">
-                This action cannot be undone.
-            </p>
+                        <p className="text-gray-600 mb-5">
+                            This action cannot be undone.
+                        </p>
 
-            <div className="flex justify-end gap-3">
+                        <div className="flex justify-end gap-3">
 
-                <button
-                    onClick={() =>
-                        setShowDeleteModal(false)
-                    }
-                    className="px-4 py-2 rounded border"
-                >
-                    Cancel
-                </button>
+                            <button
+                                onClick={() =>
+                                    setShowDeleteModal(false)
+                                }
+                                className="px-4 py-2 rounded border"
+                            >
+                                Cancel
+                            </button>
 
-                <button
-                    onClick={deleteHandler}
-                    className="px-4 py-2 rounded bg-red-600 text-white"
-                >
-                    Delete
-                </button>
+                            <button
+                                onClick={deleteHandler}
+                                className="px-4 py-2 rounded bg-red-600 text-white"
+                            >
+                                Delete
+                            </button>
 
-            </div>
+                        </div>
 
-        </div>
+                    </div>
 
-    </div>
-)}
+                </div>
+            )}
+
+                {showUpdateModal && (
+
+                    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+
+                        <div className="bg-white rounded-xl p-6 w-[400px] shadow-xl">
+
+                            <h2 className="text-lg font-semibold mb-4">
+                                Update Alias
+                            </h2>
+
+                            <input
+                                type="text"
+                                value={newAlias}
+                                onChange={(e) =>
+                                    setNewAlias(
+                                        e.target.value
+                                    )
+                                }
+                                className="w-full border rounded px-3 py-2 mb-5"
+                            />
+
+                            <div className="flex justify-end gap-3">
+
+                                <button
+                                    onClick={() =>
+                                        setShowUpdateModal(false)
+                                    }
+                                    className="border px-4 py-2 rounded"
+                                >
+                                    Cancel
+                                </button>
+
+                                <button
+                                    onClick={updateAliasHandler}
+                                    className="bg-blue-600 text-white px-4 py-2 rounded"
+                                >
+                                    Update
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                )}
     </div>
   )
 }
