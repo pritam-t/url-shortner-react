@@ -1,5 +1,10 @@
 import React from "react";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaGlobe,
+  FaEnvelope
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -7,26 +12,52 @@ const Footer = () => {
       <div className="container mx-auto px-6 lg:px-14 flex flex-col lg:flex-row lg:justify-between items-center gap-4">
         <div className="text-center lg:text-left">
           <h2 className="text-3xl font-bold mb-2">LinkForgee</h2>
-          <p>Simplifying URL shortening for efficient sharing</p>
+          <p>
+            Smart URL Management Platform for Link Shortening,
+            QR Code Generation, and Analytics Tracking
+          </p>
         </div>
 
         <p className="mt-4 lg:mt-0">
-          &copy; 2024 LinkForgee. All rights reserved.
+          © {new Date().getFullYear()} LinkForgee. All rights reserved.
         </p>
 
         <div className="flex space-x-6 mt-4 lg:mt-0">
-          <a href="#" className="hover:text-gray-200">
-            <FaFacebook size={24} />
+
+          <a
+            href="https://github.com/pritam-t"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gray-200 transition"
+          >
+            <FaGithub size={24} />
           </a>
-          <a href="#" className="hover:text-gray-200">
-            <FaTwitter size={24} />
-          </a>
-          <a href="#" className="hover:text-gray-200">
-            <FaInstagram size={24} />
-          </a>
-          <a href="#" className="hover:text-gray-200">
+
+          <a
+            href="https://www.linkedin.com/in/pritam-thopate/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gray-200 transition"
+          >
             <FaLinkedin size={24} />
           </a>
+
+          <a
+            href="https://pritamportfolio-five.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gray-200 transition"
+          >
+            <FaGlobe size={24} />
+          </a>
+
+          <a
+            href="mailto:pritamthopate27@gmail.com"
+            className="hover:text-gray-200 transition"
+          >
+            <FaEnvelope size={24} />
+          </a>
+
         </div>
       </div>
     </footer>
