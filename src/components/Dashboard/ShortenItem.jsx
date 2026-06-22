@@ -93,7 +93,7 @@ const ShortenItem = ({
                     }
                 );
 
-                refetch();
+                await refetch();
                 setShowUpdateModal(false);
 
             } catch(error) {
@@ -151,11 +151,12 @@ const ShortenItem = ({
             </a> */}
 
             <Link
-              target='_'
-              className='text-[17px]  font-montserrat font-[600] text-linkColor'
-              to={import.meta.env.VITE_REACT_FRONT_END_URL + "/s/" + `${shortUrl}`}>
-                  {subDomain + "/s/" + `${shortUrl}`}
-            </Link>
+                target="_blank"
+                className="text-[17px] font-montserrat font-[600] text-linkColor"
+                to={import.meta.env.VITE_REACT_FRONT_END_URL + "/s/" + shortUrl}
+                >
+                    {shortUrl}
+                </Link>
             <FaExternalLinkAlt className="text-linkColor" />
             </div>
 

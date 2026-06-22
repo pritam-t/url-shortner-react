@@ -30,7 +30,6 @@ const CreateNewShorten = ({ setOpen, refetch }) => {
     
     setLoading(true);
     try {
-      console.log(data);
         const { data: res } = await api.post("/api/urls/shorten", data, {
             headers: {
               "Content-Type": "application/json",
@@ -48,9 +47,8 @@ const CreateNewShorten = ({ setOpen, refetch }) => {
             });
           });
 
-          // await refetch();
-          reset();
-          setOpen(false);
+          refetch();          // refresh dashboard
+          setOpen(false);     // close popup
     } catch (error) {
         toast.error("Create ShortURL Failed");
     } finally {
@@ -103,7 +101,7 @@ const CreateNewShorten = ({ setOpen, refetch }) => {
 
         <button
           className="bg-customRed font-semibold text-white w-32  bg-custom-gradient  py-2  transition-colors  rounded-md my-3"
-          type="text"
+          type="submit"
         >
           {loading ? "Loading..." : "Create"}
         </button>
