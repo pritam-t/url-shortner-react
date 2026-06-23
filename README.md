@@ -246,6 +246,6 @@ Computer Engineering Student | Software Developer & Robotics Enthusiast
 
 <div align="center">
 
-Made with ❤️ by Pritam Thopate
+Developed By Pritam Thopate
 
 </div>
